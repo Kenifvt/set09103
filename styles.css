@@ -51,5 +51,30 @@ html, body {
     font-size:20px;
 }
 
+.grid-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 80px;
+    width: 500px;
+    height: 500px;
+}
 
+.button-box {
+    background-color: #2c84b4; /* Green background */
+    color: rgb(222, 211, 211); /* White text */
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%; /* Fill grid cell */
+    height: 100%; /* Fill grid cell */
+    transition: background-color 0.3s ease;
+}
 .navbar a:hover, .navbar a:active{background-color: #ffffff;}
+.button-box:hover {background-color:aquamarine;}
