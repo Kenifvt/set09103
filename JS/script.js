@@ -40,17 +40,16 @@ function update() {
     todoList.forEach((task, index) => {
         var li = document.createElement("li");
 
-        var taskInfo = document.createElement("span");
-        taskInfo.classList.add("task");
-        taskInfo.textContent = task.info 
-                        // (task.deadline || "") + 
-                        // (task.priority || "");
+        // var taskInfo = document.createElement("span");
+        li.classList.add("task");
+        li.textContent = task.info + " Due:" +
+                        (task.deadline || " ") + " Priority:" +
+                        (task.priority || " ");
 
-        var deleteButton = document.createElement("delbutton")
+        var deleteButton = document.createElement("delbutton");
         deleteButton.classList.add("remove");
-        deleteButton.textContent = "Delete"
-        deleteButton.addEventListener('click', () => {remove(index);})
-        li.appendChild(taskInfo);
+        deleteButton.textContent = "Delete";
+        deleteButton.addEventListener('click', () => {remove(index);});
         li.appendChild(deleteButton);
         taskList.appendChild(li);
     });
