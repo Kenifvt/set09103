@@ -2,6 +2,7 @@
 <head>
     <title>PlanIt - The To-do Website</title>
     <link rel="stylesheet" href="../styles.css">
+    <script src="../JS/script.js"></script>
 
 <style>
 
@@ -16,15 +17,30 @@
 
 </head>
 <body>
-    <div class="grid-box">
-        <button class ="button-box" onclick ="location.href='new_list.html'">New List</button>
-        <button class ="button-box" onclick ="location.href='list_gallery.html'">Saved Lists</button>
-        <button class ="button-box" onclick ="location.href='archives.html'">Archives</button>
-        <button class ="button-box" onclick ="location.href='login.html'">Log Out</button>
-    </div>
+
+    <div class = "mainbox">
+        <u><h2>Your To-Do List</h2></u>
+        
+            <input type = "text" class = "input-box" placeholder="Add a Task" id = "taskInput" required><br><br>
+            <input type="date" name="task-deadline" id ="taskDeadline">
+            <select id="priority" name = "priority" placeholder="Priority">
+                <option value="" disabled selected>Priority</option>
+
+                <!-- Options -->
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Urgent">Urgent</option>
+            </select><br><br>
+  
+
+        <button class="add-task" id="addTask">Add +</button>
+        <ul id = "taskList"></ul>
+    </div>    
+
 
 </body>
-
+<script src="../JS/script.js"></script>
 
 
 </html>

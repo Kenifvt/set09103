@@ -40,12 +40,34 @@ html, body {
       }
 
 
-.login {
+.task_container {
     background-color: white;
     padding: 30px;
     width: 300px;
     border-radius: 8px;
     text-align:center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.mainbox {
+    background-color: rgb(255, 255, 255);
+    padding: 30px;
+    width: 800px;
+    border-radius: 10px;
+    text-align:center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tasklist {
+
+}
+
+.input-box {
+    border-radius: 10px;
+    border-color: rgb(239, 16, 16);
+    width:500px;
+    height: 50px;
+    font-size: 25px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -57,30 +79,41 @@ html, body {
     font-size:20px;
 }
 
-.grid-box {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 80px;
-    width: 500px;
-    height: 500px;
+.add-task {
+    color: white;
+    background-color:rgb(215, 87, 87);
+    border: 2px solid lightgrey;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50px;
 }
 
-.button-box {
-    background-color: #2c84b4; /* Green background */
-    color: rgb(222, 211, 211); /* White text */
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%; /* Fill grid cell */
-    height: 100%; /* Fill grid cell */
-    transition: background-color 0.3s ease;
+.remove {
+    background-color: red;
+    color: white;
+    position:absolute;
+    font-size: 10px;
+    cursor:pointer;
+    padding: 5px 10px;
+    margin-left: 20px;
+    border-radius:5px;
 }
-.navbar a:hover, .navbar a:active{background-color: #ffffff;}
-.button-box:hover {background-color:aquamarine;}
+
+.task {
+    display:flex;
+    color:grey;
+    padding-left:0;
+    border-bottom: 0.5px solid #ccc;
+    justify-content: space-between;   
+    font-size:22px;
+    padding:10px;
+}
+
+
+#taskList {
+    list-style-type:square;
+}
+
+.navbar a:hover, .navbar a:active {background-color: #ffffff;}
+.add-task:hover {color: black; background-color: white;}
+.remove:hover {background-color: darkred;}
