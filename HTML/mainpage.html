@@ -1,8 +1,9 @@
-<html>
+<!DOCTYPE html>
 <head>
     <title>PlanIt - The To-do Website</title>
     <link rel="stylesheet" href="../styles.css">
     <script src="../JS/script.js"></script>
+    <meta charset="utf-8">
 
 <style>
 
@@ -24,18 +25,21 @@
             <input type = "text" class = "input-box" placeholder="Add a Task" id = "taskInput" required><br><br>
             <input type="date" name="task-deadline" id ="taskDeadline">
             <select id="priority" name = "priority" placeholder="Priority">
-                <option value="" disabled selected>Priority</option>
+                <option value="Priority" disabled selected>Priority</option>
 
                 <!-- Options -->
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-                <option value="Urgent">Urgent</option>
+                <option class = "low">low</option>
+                <option class = "medium">medium</option>
+                <option class = "high">high</option>
+                <option class = "urgent">urgent</option>
             </select><br><br>
   
 
-        <button class="add-task" id="addTask">Add +</button>
+        <button class="add-task" id="addTask">Add &#10022;</button>
         <ul id = "taskList"></ul>
+
+        <h1>Completed List</h1>
+        <ul id = "comTaskList">You have no completed tasks</ul>
     </div>    
 
 

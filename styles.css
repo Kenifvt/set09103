@@ -76,47 +76,102 @@ html, body {
     font-size:20px;
 }
 
+.low { color: greenyellow; }
+.medium { color: lightskyblue; }
+.high { color:orange; }
+.urgent { color:red; }
+
 .add-task {
     color: white;
     background-color:rgb(215, 87, 87);
     border: 2px solid lightgrey;
     cursor: pointer;
     font-size: 20px;
-    border-radius: 50px;
+    border-radius: 15px;
 }
 
+.r-container {
+    display: flex;
+    gap:2px;
+    align-items:center;
+}
 .remove {
     background-color: red;
     color: white;
+    border-color: white;
+    font-size: 12px;
+    cursor:pointer;
+    padding: 1px 5px;
+    margin-inline-start: 10px;
+    border-radius:5px;
+    float: right;   
+}
 
+.complete {
+    background-color: olive;
+    color: white;
+    border-color: white;
     font-size: 14px;
     cursor:pointer;
     padding: 5px 10px;
-    margin-left: 20px;
+    margin-inline-start: 10px;
     border-radius:5px;
+    float: right;   
+}
+
+.undo {
+    background-color: grey;
+    color: white;
+    font-size: 14px;
+    cursor:pointer;
+    padding: 5px 10px;
+    margin-inline-start: 10px;
+    border-radius:5px;
+    float: right; 
+}
+
+.deadline-tag {
+    color: black;
+    text-decoration: underline;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin-left: 20px;
     margin-left: 20px;
     float: right;   
 }
 
-.priority-tag {
-    color:wheat;
-    font-size: 18px;
 
+.priority-tag {
+    color:white;
+    font-size: 14px;
+    border: 1px solid grey;
+    border-radius:10px;
+    padding-inline:10px;
 }
 
+.priority-tag.low { background-color: greenyellow; }
+
+.priority-tag.medium { background-color: lightskyblue; }
+
+.priority-tag.high { background-color: orange; }
+
+.priority-tag.urgent { background-color: red; }
+
+
 .task {
-    font-size: 30px;
-    color:rgb(215, 87, 87);
+    font-size: 22px;
+    color:rgb(46, 45, 45);
     display: flex;             
     justify-content: space-between; 
     align-items: center;    
     padding: 10px;
     margin-bottom: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 5px;
 }
 
 
 .navbar a:hover, .navbar a:active {background-color: #ffffff;}
 .add-task:hover {color: black; background-color: white;}
-.remove:hover {background-color: darkred;}
+.remove:hover{background-color: darkred;}
+.complete:hover {background-color: darkolivegreen;}
