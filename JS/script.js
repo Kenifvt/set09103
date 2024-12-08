@@ -1,6 +1,6 @@
 var todoList = JSON.parse(localStorage.getItem("todoList")) || [];
 var comTodoList = JSON.parse(localStorage.getItem("comTodoList")) || [];
-var priorityList = ["urgent", "high", "medium", "low"];
+
 
 var addTask = document.getElementById("addTask");
 var taskInput = document.getElementById("taskInput");
@@ -9,10 +9,12 @@ var comTaskList = document.getElementById("comTaskList");
 var taskDeadline = document.getElementById("taskDeadline");
 var taskPriority = document.getElementById("priority");
 
-var sortList = document.getElementById("sortList");
+var sortListUp = document.getElementById("sortListUp");
+var sortListDown = document.getElementById("sortListDown");
 
 addTask.addEventListener('click', add);
-sortList.addEventListener('click', priSort);
+sortListUp.addEventListener('click', () => priSort("up"));
+sortListDown.addEventListener('click', () => priSort("down"));
 
 taskInput.addEventListener('keypress', (event) => event.key == 'Enter' && add());
 
@@ -154,57 +156,39 @@ function updateComplete() {
     
 }
 
-function priSort() {
+function priSort(order) {
     taskList.innerHTML = '';
+    var priorityList = ["urgent", "high", "medium", "low"];
+
+    if (order === "up") {
     priorityList.forEach((thisPriority) => {
         todoList.forEach((task, index) =>{
             if(task.priority == thisPriority) {
-            var li = document.createElement("li");
-
-            li.classList.add("task");
-            li.textContent = task.info 
-    
-            var r_container = document.createElement("div");
-            r_container.classList.add("r-container");
-    
-    
-            if (task.deadline) {
-            var deadline = document.createElement("span");
-            deadline.classList.add("deadline-tag");
-            deadline.textContent = task.deadline;
-            r_container.appendChild(deadline);
-            }
-    
-    
-            var priority = document.createElement("span");
-            priority.classList.add("priority-tag", task.priority);
-            priority.textContent = task.priority;
-            r_container.appendChild(priority);
-    
-            var completeButton = document.createElement("span");
-            completeButton.classList.add("complete");
-            completeButton.innerHTML = "&#10004;";
-            completeButton.addEventListener('click', () => {complete(index);});
-            r_container.appendChild(completeButton);
-    
-            var deleteButton = document.createElement("button");
-            deleteButton.classList.add("remove");
-            deleteButton.innerHTML = "&#10006;";
-            deleteButton.addEventListener('click', () => {remove(index);});    
-            r_container.appendChild(deleteButton);
-    
-            li.appendChild(r_container);
-            taskList.appendChild(li);
-        }
-        });
+                createTask(task, index, false);
+                 }
+                });
+         });
     }
-)};
+    
+    else if (order === "down") {
+        var revPList = priorityList.reverse();
+    
+        revPList.forEach((thisPriority) => {
+        todoList.forEach((task, index) =>{
+            if(task.priority == thisPriority) {
+                createTask(task, index, false);
+                     }
+                    });
+             });
+     }
+}
 
-// function order(type) {
-//     if (type == "priority") {
-//         priSort();
-//     }
-// }
+function dateSort() {
+    taskList.innerHTML = '';
+    todoList.forEach((task, index) => {
+        currentDate = ""
+    });
+}
 
 
 function save() {
