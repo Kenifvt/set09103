@@ -9,17 +9,20 @@ var comTaskList = document.getElementById("comTaskList");
 var taskDeadline = document.getElementById("taskDeadline");
 var taskPriority = document.getElementById("priority");
 
+var filterButton = document.getElementById("filterButton");
 var sortListUp = document.getElementById("sortListUp");
 var sortListDown = document.getElementById("sortListDown");
+var saveListButton = document.getElementById("saveListButton");
 
 addTask.addEventListener('click', add);
 sortListUp.addEventListener('click', () => priSort("up"));
 sortListDown.addEventListener('click', () => priSort("down"));
 
-taskInput.addEventListener('keypress', (event) => event.key == 'Enter' && add());
 
+taskInput.addEventListener('keypress', (event) => event.key == 'Enter' && add());
+filterButton.addEventListener('click', () => filterDate(filterButton.textContent));
 update();
-updateComplete();
+
 
 function add() {
 
@@ -45,14 +48,13 @@ function add() {
     
     save();
     update();
-    updateComplete();
+
 }
 
 function remove(index) {
     todoList.splice(index, 1)
     save();
     update();
-    updateComplete();
 }
 
 function complete(index) {
@@ -62,7 +64,7 @@ function complete(index) {
 
     save();
     update();
-    updateComplete();
+
 }
 
 function undo(index) {
@@ -71,7 +73,6 @@ function undo(index) {
 
     save();
     update();
-    updateComplete();
 }
 
 function createTask(task, index, taskComplete) {
@@ -116,7 +117,7 @@ function createTask(task, index, taskComplete) {
 
     else if (taskComplete == true) {
         li.classList.add("task");
-        li.style.borderColor = "green";
+        li.style.border = "2px solid green";
         li.style.color = "lightgrey";
         li.style.textDecoration = "line-through";
 
@@ -130,18 +131,13 @@ function createTask(task, index, taskComplete) {
         comTaskList.appendChild(li);
     }
 }
+
 function update() {
-    taskList.innerHTML = '';
+    clear();
 
     todoList.forEach((task, index) => {
-
         createTask(task, index, false);
     });
-
-
-}
-
-function updateComplete() {
 
     comTaskList.innerHTML = '';
 
@@ -153,11 +149,13 @@ function updateComplete() {
         createTask(task, index, true);
     });
 
-    
+
+
 }
 
+
 function priSort(order) {
-    taskList.innerHTML = '';
+    clear();
     var priorityList = ["urgent", "high", "medium", "low"];
 
     if (order === "up") {
@@ -168,6 +166,7 @@ function priSort(order) {
                  }
                 });
          });
+         save();
     }
     
     else if (order === "down") {
@@ -180,14 +179,57 @@ function priSort(order) {
                      }
                     });
              });
+             save();
      }
 }
 
-function dateSort() {
+var currentFilter = "none";
+if (currentFilter == "none") {
+    update();    
+}
+else if (currentFilter == "dated") {
+    filterDate();
+}
+
+else if (currentFilter == "non-dated") {
+    filterNonDate();
+}
+
+function filterDate(currentFilter) {
+    clear();
+    if (currentFilter == "Filter: None") {
+        filterButton.textContent = "Filter: Dated Tasks";
+        
+        todoList.forEach((task,index) => {
+            if(task.deadline){
+                createTask(task, index, false);
+            }
+        });
+
+    }
+
+    else if (currentFilter == "Filter: Dated Tasks") {
+        filterButton.textContent = "Filter: Non-Dated Tasks";
+        todoList.forEach((task,index) => {
+            if(!task.deadline){
+                createTask(task, index, false);
+            }
+        });
+
+    }
+
+    else if (currentFilter == "Filter: Non-Dated Tasks") {
+        filterButton.textContent = "Filter: None";
+        update();
+    }
+}
+
+
+
+
+
+function clear() {
     taskList.innerHTML = '';
-    todoList.forEach((task, index) => {
-        currentDate = ""
-    });
 }
 
 

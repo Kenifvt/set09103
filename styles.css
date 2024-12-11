@@ -53,19 +53,29 @@ html, body {
     background-color: rgb(255, 255, 255);
     padding: 30px;
     width: 800px;
+    max-width:100%;
+    max-height:80%;
+    position:relative;
     border-radius: 10px;
     text-align:center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    overflow:scroll;
+}
+
+.mainbox::-webkit-scrollbar{
+    display:block;
 }
 
 
 .input-box {
     border-radius: 10px;
     border-color: rgb(239, 16, 16);
-    width:500px;
+    width:80%;
     height: 50px;
     font-size: 25px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    position:relative;
+    
 }
 
 .button {
@@ -76,18 +86,31 @@ html, body {
     font-size:20px;
 }
 
-.low { color: greenyellow; }
+.low { color: rgb(175, 206, 128); }
 .medium { color: lightskyblue; }
 .high { color:orange; }
 .urgent { color:red; }
 
 .add-task {
     color: white;
-    background-color:rgb(215, 87, 87);
-    border: 2px solid lightgrey;
+    background-color:rgb(202, 61, 61);
+    border: 1px solid lightgrey;
     cursor: pointer;
-    font-size: 20px;
-    border-radius: 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    position:absolute;
+    transform: translateY(42%);
+    right:14%;
+    padding-block: 5px;
+}
+
+.sort-button, .save-button {
+    color: black;
+    border: 1px solid lightgrey;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 10px;
+
 }
 
 .r-container {
@@ -144,12 +167,11 @@ html, body {
 .priority-tag {
     color:white;
     font-size: 14px;
-    border: 1px solid grey;
     border-radius:10px;
     padding-inline:10px;
 }
 
-.priority-tag.low { background-color: greenyellow; }
+.priority-tag.low { background-color: rgb(164, 188, 128); }
 
 .priority-tag.medium { background-color: lightskyblue; }
 
@@ -166,7 +188,7 @@ html, body {
     align-items: center;    
     padding: 10px;
     margin-bottom: 5px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 5px;
     
     

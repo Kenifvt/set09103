@@ -22,7 +22,8 @@
     <div class = "mainbox">
         <u><h2>Your To-Do List</h2></u>
         
-            <input type = "text" class = "input-box" placeholder="Add a Task" id = "taskInput" required><br><br>
+            <input type = "text" class = "input-box" placeholder="Enter a Task" id = "taskInput" required>
+            <button class="add-task" id="addTask">Create Task &#8853;</button><br><br>
             <input type="date" name="task-deadline" id ="taskDeadline">
             <select id="priority" name = "priority" placeholder="Priority">
                 <option value="Priority" disabled selected>Priority</option>
@@ -32,13 +33,15 @@
                 <option class = "medium">medium</option>
                 <option class = "high">high</option>
                 <option class = "urgent">urgent</option>
-            </select><br><br>
+            </select><br>
   
 
-        <button class="add-task" id="addTask">Add &#10022;</button>
-        <button class="add-task" id="sortListUp">Sort &#11141;</button>
-        <button class="add-task" id="sortListDown">Sort &#11143;</button>
+        
         <ul id = "taskList"></ul>
+        <button class="sort-button" id="sortListUp">Sort ▲</button>
+        <button class="sort-button" id="sortListDown">Sort ▼</button>
+        <button class ="sort-button" id = "filterButton">Filter: None</button>
+        <button class ="save-button" id = "saveListButton">&#128190;<u>Save List</u></button> 
 
         <h1>Completed List</h1>
         <ul id = "comTaskList">You have no completed tasks</ul>
