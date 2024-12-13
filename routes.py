@@ -74,9 +74,11 @@ def save_todos():
     if 'username' not in session:
         return jsonify({"error": "Unauthorized"}), 403
 
-
+    # Gets json data from request
     data = request.get_json()
     username = session['username']
+
+    # Extracts todolist and comtodoList from json data or defaults to an empty list.
     todos = data.get('todoList', [])
     completed_todos = data.get('comTodoList', [])
 
@@ -84,7 +86,7 @@ def save_todos():
         db = get_db()
         cursor = db.cursor()
 
-
+        # Deletes all tasks with the user_name to store new set of tasks.
         cursor.execute( "DELETE FROM tasks WHERE user_name = ? AND task_completed == TRUE", (username,))
         cursor.execute (" DELETE FROM tasks WHERE user_name = ? AND task_completed == FALSE", (username,))
         # Insert active todos into tasks table
@@ -98,30 +100,40 @@ def save_todos():
                            (username, completed_todo['info'], completed_todo['deadline'], completed_todo['priority'], True))
 
         db.commit()
+
+        # Status code 200 if save request is successful
         return jsonify({"message": "Todos saved successfully!"}), 200
     except Exception as e:
+        # Status code 500 for internal server errors
         return jsonify({"error": str(e)}), 500
 
+# Renders index.html, initial page for website.
 @app.route('/')
 def home():
         return render_template('index.html')
+
+# route for login with POST and GET methods to retrieve and use user credentials.
 @app.route ('/login', methods=['POST', 'GET'])
 def login():
     db = get_db()
+
+    # If request is POST, sets username and password.
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
 
+        # Checks database for credentials matching.
         cursor = db.cursor().execute('SELECT * FROM credentials WHERE username = ?', (username,))
         user = cursor.fetchone()
 
         if user:
-            # User found, validate the password
+            # User found, validates the password
             stored_password = user[1]
             if bcrypt.checkpw(password.encode('utf-8'), stored_password):
                 session['username'] = username
 
                 return redirect('/mainpage/' + username)
+            # Flash message if user is not found (usernamne/password)
             else:
                 flash('Invalid password. Please try again.')
                 return render_template('login.html')
@@ -133,6 +145,7 @@ def login():
 
         return render_template('login.html')
 
+# Signup route with methods POST and GET
 @app.route ('/signup/', methods=['POST', 'GET'])
 def signup():
     db = get_db()
@@ -140,10 +153,12 @@ def signup():
         username = request.form['username']
         password = request.form['password']
 
+        # Checks if username is already taken. doesn't do this for password. (many people can have the same password)
         cursor = db.cursor()
         cursor.execute('SELECT * FROM credentials WHERE username = ?', (username,))
         user = cursor.fetchone()
 
+        # Username already in database.
         if user:
             flash('Username already taken.')
             return redirect('/signup/')
@@ -156,9 +171,12 @@ def signup():
     else:
 
         return render_template('signup.html')
+
+    # Route for mainpage
 @app.route ( '/mainpage/<username>', methods=['POST', 'GET'])
 def mainpage(username = None):
     db = get_db()
+    # Sets sessions username as username used for database in mainpage functions.
     if 'username' in session:
         username = session['username']
     else:
@@ -166,13 +184,18 @@ def mainpage(username = None):
 
     return render_template('mainpage.html', username=username)
 
+# route for logout function
 @app.route ('/logout')
 def logout():
+    # pops session username
     session.pop('username', None)
+
+    # message flash
     flash('Logged out successfully.')
     return redirect ('/login')
 
 
+# Error handler for page not found
 @app.errorhandler(404)
 def page_not_found(error):
     return "Error: page not found", 404
