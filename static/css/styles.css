@@ -91,6 +91,20 @@ html, body {
 .high { color:orange; }
 .urgent { color:red; }
 
+.logout-container {
+    position:absolute;
+    top:5px;
+    right:5px;
+}
+
+.logout-btn {
+    color:white;
+    background-color: rgb(111, 35, 35);
+    padding:5px 10px;
+    font-size:14px;
+    border-radius: 5px;
+}
+
 .add-task {
     color: white;
     background-color:rgb(202, 61, 61);
@@ -197,5 +211,5 @@ html, body {
 
 .navbar a:hover, .navbar a:active {background-color: #ffffff;}
 .add-task:hover {color: black; background-color: white;}
-.remove:hover{background-color: darkred;}
+.remove:hover, .logout-btn:hover {background-color: darkred;}
 .complete:hover {background-color: darkolivegreen;}
