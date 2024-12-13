@@ -7,8 +7,11 @@
 
 </head>
 <body style="background-image: url('{{ url_for('static', filename='img/background.png') }}');">
-
-        <a href="{{ url_for('logout') }}">Log Out</a>
+     
+    <div class = "logout-container">
+        <a href="{{ url_for('logout') }}" class = "logout-btn">Log Out</a>eroku
+     </div>
+    
       <div class = "mainbox">
         <u><h1>{{username}}'s To-do List</h1></u>
 
