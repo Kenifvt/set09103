@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+    <title>PlanIt - The To-do Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta charset="utf-8">
+
+</head>
+<body style="background-image: url('{{ url_for('static', filename='img/background.png') }}');">
+
+        <a href="{{ url_for('logout') }}">Log Out</a>
+      <div class = "mainbox">
+        <u><h1>{{username}}'s To-do List</h1></u>
+
+            <input type = "text" class = "input-box" placeholder="Enter a Task" id = "taskInput" required>
+            <button class="add-task" id="addTask">Create Task &#8853;</button><br><br>
+            <input type="date" name="task-deadline" id ="taskDeadline">
+            <select id="priority" name = "priority" placeholder="Priority">
+                <option value="Priority" disabled selected>Priority</option>
+
+                <!-- Options -->
+                <option class = "low">low</option>
+                <option class = "medium">medium</option>
+                <option class = "high">high</option>
+                <option class = "urgent">urgent</option>
+            </select><br>
+
+
+
+        <ul id = "taskList"></ul>
+        <button class="sort-button" id="sortListUp">Sort ▲</button>
+        <button class="sort-button" id="sortListDown">Sort ▼</button>
+        <button class ="sort-button" id = "filterButton">Filter: None</button>
+        <button class ="save-button" id = "saveListButton">&#128190;<u>Save List</u></button>
+
+        <h1>Completed List</h1>
+        <ul id = "comTaskList">You have no completed tasks</ul>
+    </div>
+
+</body>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</html>
