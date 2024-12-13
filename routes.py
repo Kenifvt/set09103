@@ -5,9 +5,13 @@ import bcrypt
 import sqlite3
 app = Flask(__name__)
 
+# defines db location to login.db
 db_location = 'var/login.db'
 
+# A Secret key is added to the session
 app.secret_key = os.urandom(24)
+
+# Method to get database
 def get_db():
     db = getattr(g, 'db', None)
     if db is None:
@@ -17,11 +21,13 @@ def get_db():
 
 @app.teardown_appcontext
 
+# closes database
 def close_db_connection(exception):
     db = getattr(g, 'db', None)
     if db is not None:
         db.close()
 
+# Initialises database
 def init_db():
     with app.app_context():
         db = get_db()
@@ -29,6 +35,7 @@ def init_db():
             db.cursor().executescript(f.read())
             db.commit()
 
+# route to load tasks for a logged-in user
 @app.route('/load_tasks', methods=['GET'])
 def load_tasks():
     if 'username' not in session:
@@ -39,11 +46,11 @@ def load_tasks():
         db = get_db()
         cursor = db.cursor()
 
-        # Query for active tasks
+        # Query to get all current tasks (active) from database table 'tasks' based on username
         cursor.execute("SELECT task_info, task_deadline, task_priority, task_completed FROM tasks WHERE user_name = ? AND task_completed == FALSE ", (username,))
         active_list = cursor.fetchall()
 
-        # Query for completed tasks
+        # Same query for all completed tasks based on user.
         cursor.execute("SELECT task_info, task_deadline, task_priority, task_completed FROM tasks WHERE user_name = ? AND task_completed == TRUE", (username,))
         complete_list = cursor.fetchall()
 
@@ -51,17 +58,22 @@ def load_tasks():
         active_list = [{"info": task[0], "deadline": task[1], "priority": task[2], "completed": task[3]} for task in active_list]
         complete_list = [{"info": task[0], "deadline": task[1], "priority": task[2], "completed": task[3]} for task in complete_list]
 
+
         return jsonify({
             "activeList": active_list,
             "completeList": complete_list
         }), 200
+    # Exception thrown in case of failure
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Save list to database table functionality
 @app.route('/save_lists', methods=['POST'])
 def save_todos():
+    # checks if current user is on session's username
     if 'username' not in session:
         return jsonify({"error": "Unauthorized"}), 403
+
 
     data = request.get_json()
     username = session['username']

@@ -14,7 +14,7 @@
     
       <div class = "mainbox">
         <u><h1>{{username}}'s To-do List</h1></u>
-
+            <!-- Main functionality layout -->
             <input type = "text" class = "input-box" placeholder="Enter a Task" id = "taskInput" required>
             <button class="add-task" id="addTask">Create Task &#8853;</button><br><br>
             <input type="date" name="task-deadline" id ="taskDeadline">
@@ -29,13 +29,14 @@
             </select><br>
 
 
-
+        <!-- Options for sort and filters-->
         <ul id = "taskList"></ul>
         <button class="sort-button" id="sortListUp">Sort ▲</button>
         <button class="sort-button" id="sortListDown">Sort ▼</button>
         <button class ="sort-button" id = "filterButton">Filter: None</button>
         <button class ="save-button" id = "saveListButton">&#128190;<u>Save List</u></button>
 
+          <!-- Completed list (separate list entirely and stored differently) -->
         <h1>Completed List</h1>
         <ul id = "comTaskList">You have no completed tasks</ul>
     </div>

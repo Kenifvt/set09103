@@ -8,6 +8,7 @@
 </head>
 <body style="background-image: url('{{ url_for('static', filename='img/background.png') }}');">
 
+<!-- Form with method POST to call routes.py -->
 <div class = "task_container">
     <form action = "{{ url_for('login') }}" method ="POST" name = "form">
     <h3><label for = "username">Username:</label></h3>
@@ -19,7 +20,7 @@
 
     </form>
 
-    <!-- Flash messages -->
+    <!-- Flash messages (if any are used)-->
     {% with messages = get_flashed_messages() %}
      {% if messages %}
         <ul style="color: #a82626; list-style-type: none;">

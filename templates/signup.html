@@ -8,6 +8,7 @@
 </head>
 <body style="background-image: url('{{ url_for('static', filename='img/background.png') }}');">
 
+<!-- Similar to login but will store credentials to database -->
 <div class = "task_container">
     <form action = "" method ="post" name = "form">
     <h3><label for = "username">Enter Username:</label></h3>
@@ -17,7 +18,7 @@
 
         <input type = "submit" name = "submit" id = "submit" class = "button">
     </form>
-    <!-- Flash messages -->
+    <!-- Flash messages (if any are used) -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         <ul style="color: #a82626; list-style-type: none;">
